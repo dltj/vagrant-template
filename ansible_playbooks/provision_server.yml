@@ -1,0 +1,8 @@
+---
+
+- name: Install Oracle Java
+  hosts: aspace.app
+  user: vagrant
+  roles:
+    - { role: ansiblebit.oracle-java,
+        oracle_java_set_as_default: yes }

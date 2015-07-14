@@ -1,0 +1,4 @@
+.vagrant
+roles/managed
+log
+cache
