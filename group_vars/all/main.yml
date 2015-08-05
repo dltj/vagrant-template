@@ -1,0 +1,9 @@
+---
+
+common_system_packages:
+    - curl
+    - wget
+    - build-essential
+    - python-software-properties
+    - mcrypt
+    - git

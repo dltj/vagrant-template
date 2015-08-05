@@ -1,0 +1,21 @@
+---
+
+- name: Provision or Update Server
+  hosts: cspace.vagrant
+  user: vagrant
+  roles:
+    - { role: ansiblebit.oracle-java,
+        oracle_java_set_as_default: yes }
+  tasks:
+    - name: Update Packages
+      sudo: yes
+      apt:
+        update_cache: yes
+
+    - name: Install system packages
+      sudo: yes
+      apt:
+        pkg: "{{ item }}"
+        state: latest
+      with_flattened:
+        - "{{ common_system_packages }}"

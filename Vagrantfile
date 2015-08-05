@@ -27,7 +27,10 @@ Vagrant.configure(2) do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  config.vm.network "private_network", ip: "10.1.1.10"
+  config.vm.network :private_network, ip: "10.1.1.10"
+  config.vm.hostname = "cspace.vagrant"
+  config.hostsupdater.aliases = ["cspace.vagrant"]
+  config.hostsupdater.remove_on_suspend = true
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -69,11 +72,11 @@ Vagrant.configure(2) do |config|
   #   sudo apt-get update
   #   sudo apt-get install -y apache2
   # SHELL
-  config.trigger.after :up do
-    run "sudo ssh -M -S Vagrant-80 -p 2222 -gNfL 80:localhost:80 vagrant@localhost -i .vagrant/machines/default/virtualbox/private_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null && echo $! > .vagrant/port-80-pid"
-  end
-  config.trigger.before :suspend do
-    run "sudo ssh -S Vagrant-80 -O exit vagrant@localhost"
-  end
+#  config.trigger.after :up do
+#    run "sudo ssh -M -S .vagrant/Vagrant-80 -p 2222 -gNfL 80:localhost:80 vagrant@localhost -i .vagrant/machines/default/virtualbox/private_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null && echo $! > .vagrant/port-80-pid"
+#  end
+#  config.trigger.before :suspend do
+#    run "sudo ssh -S Vagrant-80 -O exit vagrant@localhost"
+#  end
 
 end
