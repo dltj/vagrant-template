@@ -4,7 +4,7 @@
 
 ## Usage
 
-When running Ansible playbooks out of the ansible_playbooks directory, be sure to include the VirtualBox machine private key in the command line, as such:  `ansible-playbook -i inventory/vagrant --private-key=.vagrant/machines/default/virtualbox/private_key ansible_playbooks/provision_server.yml`
+When running Ansible playbooks out of the ansible_playbooks directory, be sure to include the VirtualBox machine private key in the command line, as such:  `ansible-playbook -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory provision_server.yml`
 
 ## Contributing
 
@@ -15,7 +15,10 @@ When running Ansible playbooks out of the ansible_playbooks directory, be sure t
 ### Requirements
 
 * Ansible, version 1.8 or greater
-* [emyl/vagrant-triggers](https://github.com/emyl/vagrant-triggers) to run commands on the host in conjunction with Vagrant commands
+
+#### Optional
+* `vagrant plugin install vagrant-hostmanager` - Use [smdahlen/vagrant-hostmanager](https://github.com/smdahlen/vagrant-hostmanager) to manage the VirtualBox host's /etc/hosts file.
+* `vagrant plugin install vagrant-triggers` - Use [emyl/vagrant-triggers](https://github.com/emyl/vagrant-triggers) to run commands on the host in conjunction with Vagrant commands
 
 ### Installation
 

@@ -6,6 +6,11 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure(2) do |config|
+  config.hostmanager.enabled = true
+  config.hostmanager.manage_host = true
+  config.hostmanager.ignore_private_ip = false
+  config.hostmanager.include_offline = true
+
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
@@ -29,8 +34,7 @@ Vagrant.configure(2) do |config|
   # using a specific IP.
   config.vm.network :private_network, ip: "10.1.1.10"
   config.vm.hostname = "cspace.vagrant"
-  config.hostsupdater.aliases = ["cspace.vagrant"]
-  config.hostsupdater.remove_on_suspend = true
+
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -72,6 +76,9 @@ Vagrant.configure(2) do |config|
   #   sudo apt-get update
   #   sudo apt-get install -y apache2
   # SHELL
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "vagrant.yml"
+  end
 #  config.trigger.after :up do
 #    run "sudo ssh -M -S .vagrant/Vagrant-80 -p 2222 -gNfL 80:localhost:80 vagrant@localhost -i .vagrant/machines/default/virtualbox/private_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null && echo $! > .vagrant/port-80-pid"
 #  end
